@@ -64,7 +64,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: baesa/baesa
+          images: comstering/baesa
 
       # Docker Hub 로그인
       - name: Login to DockerHub
