@@ -9,6 +9,8 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 @Entity
@@ -34,4 +36,8 @@ open class Restaurant {
     @Column(name = "rating", nullable = false)
     @ColumnDefault("0.0")
     open var rating: Float? = null
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    open var categoryId: Category? = null
 }
