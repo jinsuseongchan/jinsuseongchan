@@ -1,7 +1,7 @@
 package io.github.baesa.restaurant.domain
 
-
 import lombok.Data
+import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
 import javax.persistence.Column
@@ -17,8 +17,8 @@ import javax.persistence.Table
 @Data
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "menu")
-open class Menu {
+@Table(name = "restaurant")
+open class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,13 +27,17 @@ open class Menu {
     @Column(name = "name", nullable = false)
     open var name: String? = null
 
-    @Column(name = "picture_path")
-    open var picturePath: String? = null
+    @Column(name = "address", nullable = false)
+    open var address: String? = null
+
+    @Column(name = "telephone_number", nullable = false)
+    open var telephoneNumber: String? = null
 
     @Column(name = "rating", nullable = false)
+    @ColumnDefault("0.0")
     open var rating: Float? = null
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    open var restaurantId: Restaurant? = null
+    @JoinColumn(name = "category_id")
+    open var categoryId: Category? = null
 }
