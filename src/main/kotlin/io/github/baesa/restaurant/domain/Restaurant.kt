@@ -1,6 +1,6 @@
 package io.github.baesa.restaurant.domain
 
-import lombok.Data
+import lombok.Getter
 import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 @Entity
-@Data
+@Getter
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "restaurant")
