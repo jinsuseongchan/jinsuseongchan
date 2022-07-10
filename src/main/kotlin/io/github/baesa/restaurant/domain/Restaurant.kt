@@ -18,26 +18,26 @@ import javax.persistence.Table
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "restaurant")
-open class Restaurant {
+class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    open var id: Long? = null
+    var id: Long? = null
 
     @Column(name = "name", nullable = false)
-    open var name: String? = null
+    var name: String? = null
 
     @Column(name = "address", nullable = false)
-    open var address: String? = null
+    var address: String? = null
 
     @Column(name = "telephone_number", nullable = false)
-    open var telephoneNumber: String? = null
+    var telephoneNumber: String? = null
 
     @Column(name = "rating", nullable = false)
     @ColumnDefault("0.0")
-    open var rating: Float? = null
+    var rating: Float? = null
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    open var categoryId: Category? = null
+    var categoryId: Category? = null
 }

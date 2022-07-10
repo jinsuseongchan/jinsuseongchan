@@ -1,6 +1,5 @@
 package io.github.baesa.restaurant.domain
 
-
 import lombok.Getter
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
@@ -18,22 +17,22 @@ import javax.persistence.Table
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "menu")
-open class Menu {
+class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    open var id: Long? = null
+    var id: Long? = null
 
     @Column(name = "name", nullable = false)
-    open var name: String? = null
+    var name: String? = null
 
     @Column(name = "picture_path")
-    open var picturePath: String? = null
+    var picturePath: String? = null
 
     @Column(name = "rating", nullable = false)
-    open var rating: Float? = null
+    var rating: Float? = null
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
-    open var restaurantId: Restaurant? = null
+    var restaurantId: Restaurant? = null
 }
