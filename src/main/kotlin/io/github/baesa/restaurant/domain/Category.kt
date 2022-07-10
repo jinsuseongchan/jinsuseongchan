@@ -11,12 +11,12 @@ import javax.persistence.Table
 @Entity
 @Getter
 @Table(name = "category")
-class Category {
+class Category (
+    @Column(name = "name", nullable = false)
+    var name: String
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
-
-    @Column(name = "name", nullable = false)
-    var name: String? = null
 }

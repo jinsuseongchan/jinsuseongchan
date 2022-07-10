@@ -17,22 +17,19 @@ import javax.persistence.Table
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "menu")
-class Menu {
+class Menu (
+    @Column(name = "name", nullable = false)
+    var name: String,
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    var restaurantId: Restaurant
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
 
-    @Column(name = "name", nullable = false)
-    var name: String? = null
-
     @Column(name = "picture_path")
     var picturePath: String? = null
-
-    @Column(name = "rating", nullable = false)
-    var rating: Float? = null
-
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    var restaurantId: Restaurant? = null
 }
