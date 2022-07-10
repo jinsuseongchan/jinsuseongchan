@@ -1,4 +1,4 @@
-package io.github.baesa.restaurant.domain
+package io.github.baesa.domain.restaurant.domain
 
 import lombok.Getter
 import javax.persistence.Column
