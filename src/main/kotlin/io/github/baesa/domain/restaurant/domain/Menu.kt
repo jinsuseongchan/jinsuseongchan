@@ -4,6 +4,7 @@ import lombok.Getter
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
 import javax.persistence.Column
+import javax.persistence.Embedded
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -21,9 +22,9 @@ class Menu (
     @Column(name = "name", nullable = false)
     var name: String,
 
+    @Embedded
     @Column(name = "price", nullable = false)
-    // todo: var price: Money
-    var price: Int,
+    var price: Money,
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
