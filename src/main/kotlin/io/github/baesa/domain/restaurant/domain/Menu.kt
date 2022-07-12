@@ -21,6 +21,10 @@ class Menu (
     @Column(name = "name", nullable = false)
     var name: String,
 
+    @Column(name = "price", nullable = false)
+    // todo: var price: Money
+    var price: Int,
+
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     var restaurantId: Restaurant
