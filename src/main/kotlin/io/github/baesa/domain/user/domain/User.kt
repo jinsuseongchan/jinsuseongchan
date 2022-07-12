@@ -1,16 +1,22 @@
 package io.github.baesa.domain.user.domain
 
-import com.nimbusds.openid.connect.sdk.claims.Gender
+import lombok.Getter
+import org.hibernate.annotations.DynamicInsert
+import org.hibernate.annotations.DynamicUpdate
 import java.time.LocalDate
-import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
+@Getter
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "user")
-class User (
+class User(
     @Column(name = "username", nullable = false, length = 20, unique = true)
     var username: String,
 
@@ -33,6 +39,7 @@ class User (
     var phone: String
 ) {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    var id: UUID? = null
+    var id: Long? = null
 }
