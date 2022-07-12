@@ -22,6 +22,7 @@ class Menu (
     var name: String,
 
     @Column(name = "price", nullable = false)
+    // todo: var price: Money
     var price: Int,
 
     @ManyToOne
