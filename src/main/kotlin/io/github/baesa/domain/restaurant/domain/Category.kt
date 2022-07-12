@@ -1,6 +1,8 @@
 package io.github.baesa.domain.restaurant.domain
 
 import lombok.Getter
+import org.hibernate.annotations.DynamicInsert
+import org.hibernate.annotations.DynamicUpdate
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -10,6 +12,8 @@ import javax.persistence.Table
 
 @Entity
 @Getter
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "category")
 class Category (
     @Column(name = "name", nullable = false)
