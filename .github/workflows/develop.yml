@@ -23,6 +23,13 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
+      # application.yml 파일 생성
+      - name: Set application.yml
+        run: |
+          cd ./src/main/resources
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION_DEV }}" > ./application.yml
+
       # 유닛 테스트
       - name: Run Unit Test
         run:
@@ -44,6 +51,13 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
+
+      # application.yml 파일 생성
+      - name: Set application.yml
+        run: |
+          cd ./src/main/resources
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION_STAGING }}" > ./application.yml
 
       # Spring 빌드
       - name: Spring Build, Make .jar
