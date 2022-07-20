@@ -28,9 +28,6 @@ class Review (
     @JoinColumn(name = "restaurant_id")
     var restaurantId: Restaurant,
 
-    @Column(name = "rating", nullable = false)
-    var rating: Float,
-
     @Column(name = "post_script", nullable = false)
     var postScript: String
 ) {
