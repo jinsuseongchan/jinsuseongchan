@@ -5,7 +5,7 @@ import javax.persistence.Embeddable
 
 @Getter
 @Embeddable
-open class Money(var value: Int) {
+class Money (var value: Int) {
     fun add(money: Money): Money {
         return Money(this.value + money.value)
     }
