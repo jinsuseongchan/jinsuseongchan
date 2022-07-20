@@ -10,6 +10,7 @@ plugins {
 
 allOpen {
     annotation("javax.persistence.Entity")
+    annotation("javax.persistence.Embeddable")
 }
 
 group = "io.github"
