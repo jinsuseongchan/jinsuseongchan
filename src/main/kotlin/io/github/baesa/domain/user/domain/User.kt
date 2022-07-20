@@ -15,7 +15,7 @@ import javax.persistence.Table
 @Getter
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "user")
+@Table(name = "member")
 class User(
     @Column(name = "username", nullable = false, length = 20, unique = true)
     var username: String,
