@@ -28,8 +28,9 @@ jobs:
       - name: Set application.yml
         run: |
           cd ./src/main/resources
-          touch ./application.yml
-          echo "${{ secrets.APPLICATION_DEV }}" > ./application.yml
+          touch ./application-dev.yml
+          echo "${{ secrets.APPLICATION_DEV }}" > ./application-dev.yml
+          ls -al
 
       # 유닛 테스트
       - name: Run Unit Test
@@ -57,8 +58,11 @@ jobs:
       - name: Set application.yml
         run: |
           cd ./src/main/resources
+          touch ./application-dev.yml
+          echo "${{ secrets.APPLICATION_DEV }}" > ./application-dev.yml
           touch ./application.yml
           echo "${{ secrets.APPLICATION_PROD }}" > ./application.yml
+          ls -al
 
       # Spring 빌드
       - name: Spring Build, Make .jar
