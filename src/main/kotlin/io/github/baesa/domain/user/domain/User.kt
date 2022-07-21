@@ -1,10 +1,13 @@
 package io.github.baesa.domain.user.domain
 
+import io.github.baesa.global.domain.Authority
+import io.github.baesa.global.util.AuthorityConverter
 import lombok.Getter
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
 import java.time.LocalDate
 import javax.persistence.Column
+import javax.persistence.Convert
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -30,13 +33,17 @@ class User(
     var name: String,
 
     @Column(name = "gender")
-    var gender: String,
+    var gender: String? = null,
 
     @Column(name = "birthday")
-    var birthday: LocalDate,
+    var birthday: LocalDate? = null,
 
     @Column(name = "phone")
-    var phone: String
+    var phone: String? = null,
+
+    @Column(name = "authority", nullable = false)
+    @Convert(converter = AuthorityConverter::class)
+    var authority: Authority
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
