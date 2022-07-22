@@ -3,6 +3,7 @@ package io.github.baesa.domain.user.domain
 import io.github.baesa.global.domain.Authority
 import io.github.baesa.global.util.AuthorityConverter
 import lombok.Getter
+import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
 import java.time.LocalDate
@@ -29,17 +30,11 @@ class User(
     @Column(name = "nick_name", nullable = false, length = 20, unique = true)
     var nickName: String,
 
-    @Column(name = "name", nullable = false, length = 20)
-    var name: String,
-
     @Column(name = "gender")
     var gender: String? = null,
 
     @Column(name = "birthday")
     var birthday: LocalDate? = null,
-
-    @Column(name = "phone")
-    var phone: String? = null,
 
     @Column(name = "authority", nullable = false)
     @Convert(converter = AuthorityConverter::class)
