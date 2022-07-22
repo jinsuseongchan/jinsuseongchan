@@ -26,10 +26,8 @@ class UserRepositoryTest {
                 username = "test",
                 password = "test",
                 nickName = "allInfoUser",
-                name = "allInfo",
                 gender = "남자",
                 birthday = LocalDate.now(),
-                phone = "01012345678",
                 authority = Authority.USER
             )
 
@@ -48,7 +46,6 @@ class UserRepositoryTest {
                 username = "test",
                 password = "test",
                 nickName = "nullableInfoUser",
-                name = "nullableInfo",
                 authority = Authority.USER
             )
 
