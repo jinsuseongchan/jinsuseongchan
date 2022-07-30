@@ -1,24 +1,32 @@
-name: Build
+name: Deploy
 
 on:
   push:
-    branches: [ feature/* develop, main, release/*, bugfix/*, hotfix/* ]
+    branches: [ feature/*, release/*, main ]
+    tags: [ 'v*' ]
   pull_request:
-    branches: [ develop, main ]
+    branches: [ main ]
   workflow_run:
-    workflows: [ "Unit Test" ]
+    workflows: [ "Build" ]
     types:
       - completed
 
 jobs:
-  build:
-    name: Docker Build
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
 
+    # 배포는 추후 작성
     steps:
       # 현재 레포지토리 업로드
       - name: Checkout my code
         uses: actions/checkout@v3
+
+      # 정상적으로 clone 되었는지 확인
+      - name: Run pwd
+        run: pwd
+      - name: Check directory
+        run: ls -al
 
       # JAVA JDK 설치
       - name: Set up JDK
@@ -27,14 +35,50 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      # application.yml 파일 생성
-      - name: Set application.yml
+      # application-dev.yml 파일 생성
+      - name: Set application-dev.yml
         run: |
           cd ./src/main/resources
           touch ./application-dev.yml
           echo "${{ secrets.APPLICATION_DEV }}" > ./application-dev.yml
+          ls -al
+
+      # application.yml 파일 생성 staging 배포
+      # release 브랜치일 경우 staging 배포
+      - name: Set application-dev.yml
+        if: ${{ github.event_name.branches == 'feature/*' }}
+        run: |
           touch ./application.yml
           echo "${{ secrets.APPLICATION_STAGING }}" > ./application.yml
+          ls -al
+
+      # application.yml 파일 생성 production 배포
+      # main 브랜치일 경우 production 배포
+      - name: Set application-dev.yml
+        if: ${{ github.event_name.branches == 'main' }}
+        run: |
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION_PROD }}" > ./application.yml
+          ls -al
+
+      # meta
+      # application.yml 파일 생성 staging 배포
+      # release 브랜치일 경우 staging 배포
+      - name: Set application.yml
+        if: ${{ steps.meta.outputs.labels == 'feature/*' }}
+        run: |
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION_STAGING }}" > ./application.yml
+          ls -al
+
+      # meta
+      # application.yml 파일 생성 production 배포
+      # main 브랜치일 경우 production 배포
+      - name: Set application.yml
+        if: ${{ steps.meta.outputs.labels == 'main' }}
+        run: |
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION_PROD }}" > ./application.yml
           ls -al
 
       # Spring 빌드
