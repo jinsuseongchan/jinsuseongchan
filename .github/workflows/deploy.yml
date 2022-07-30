@@ -2,14 +2,14 @@ name: Deploy
 
 on:
   push:
-    branches: [ feature/*, release/*, main ]
+    branches: [ feature/**, release/**, main ]
     tags: [ 'v*' ]
   pull_request:
     branches: [ main ]
   workflow_run:
     workflows: [ "Build" ]
     types: [ completed ]
-    branches: [ feature/*, release/*, main ]
+    branches: [ feature/**, release/**, main ]
 
 jobs:
   deploy:

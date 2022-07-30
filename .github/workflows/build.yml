@@ -2,13 +2,13 @@ name: Build
 
 on:
   push:
-    branches: [ feature/*, develop, main, release/*, bugfix/*, hotfix/* ]
+    branches: [ feature/**, develop, main, release/**, bugfix/**, hotfix/** ]
   pull_request:
     branches: [ develop, main ]
   workflow_run:
     workflows: [ "Unit Test" ]
     types: [ completed ]
-    branches: [ feature/*, develop, main, release/*, bugfix/*, hotfix/* ]
+    branches: [ feature/**, develop, main, release/**, bugfix/**, hotfix/** ]
 
 jobs:
   build:
