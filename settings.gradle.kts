@@ -1,1 +1,1 @@
-rootProject.name = "baesa"
+rootProject.name = "jinsuseongchan"

@@ -2,7 +2,7 @@ FROM openjdk:11-jdk
 
 ARG JAR_FILE=build/libs/*.jar
 
-COPY ${JAR_FILE} baesa.jar
+COPY ${JAR_FILE} jinsuseongchan.jar
 
 EXPOSE 8080
 
