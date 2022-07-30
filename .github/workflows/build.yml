@@ -14,7 +14,6 @@ jobs:
   build:
     name: Docker Build
     runs-on: ubuntu-latest
-    needs: unittest
 
     steps:
       # 현재 레포지토리 업로드
