@@ -1,4 +1,4 @@
-name: feature branch commit
+name: Unit Test
 
 on: push
 
