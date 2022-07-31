@@ -103,10 +103,10 @@ jobs:
     name: Preview Deploy
     runs-on: ubuntu-latest
     needs: build
+    if: ${{ github.event_name != 'pull_request' }}
 
     # 배포는 추후 환경 구축 후 작성
     steps:
       - name: RUN DEPLOY
         run: |
           echo '${{ github.ref_name }}'
-          echo '${{ toJson(steps) }}'
