@@ -1,4 +1,4 @@
-name: develop branch commit is Docker Build
+name: Preview Deploy
 
 on:
   push:
