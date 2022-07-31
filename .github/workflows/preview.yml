@@ -99,17 +99,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Check stpes
-        run: |
-          echo '${{ github.ref_name }}'
-          echo '${{ toJSON(steps) }}'
-          echo '${{ github.base_ref }}'
-          echo '${{ toJSON(github.event) }}'
-          echo '${{ github.event_name }}'
-          echo '${{ github.head_ref }}'
-          echo '${{ github.ref }}'
-          
-
   deploy:
     name: Preview Deploy
     runs-on: ubuntu-latest
