@@ -3,6 +3,7 @@ name: Production Deploy
 on:
   push:
     branches: [ main ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ main ]
 
@@ -103,6 +104,7 @@ jobs:
     name: Production Deploy
     runs-on: ubuntu-latest
     needs: build
+    if: ${{ github.event_name != 'pull_request' }}
 
     # 배포는 추후 환경 구축 후 작성
     steps:
