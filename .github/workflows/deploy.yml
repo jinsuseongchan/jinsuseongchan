@@ -15,6 +15,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     # 배포는 추후 작성
     steps:

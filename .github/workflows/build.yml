@@ -14,6 +14,7 @@ jobs:
   build:
     name: Docker Build
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       # 현재 레포지토리 업로드
