@@ -1,6 +1,6 @@
 package io.github.jinsuseongchan.global.util
 
-import io.github.jinsuseongchan.global.domain.Authority
+import io.github.jinsuseongchan.global.config.Authority
 import javax.persistence.AttributeConverter
 import javax.persistence.Converter
 

@@ -1,7 +1,7 @@
 package io.github.jinsuseongchan.domain.user.repository
 
 import io.github.jinsuseongchan.domain.user.domain.User
-import io.github.jinsuseongchan.global.domain.Authority
+import io.github.jinsuseongchan.global.config.Authority
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
