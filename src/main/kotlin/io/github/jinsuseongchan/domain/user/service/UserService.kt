@@ -11,10 +11,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(private val userRepository: UserRepository): UserDetailsService {
+class UserService(
+    @Autowired private val userRepository: UserRepository,
+    @Autowired private val bCryptPasswordEncoder: BCryptPasswordEncoder): UserDetailsService {
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
         val user: User = userRepository.findByUsername(username)?: throw UsernameNotFoundException("아이디나 비밀번호가 일치하지 않습니다.")
         return UserDetailImpl(user)
+    }
+
+    fun saveUser(user: User): User {
+        val encodePassword: String = bCryptPasswordEncoder.encode(user.password)
+        val encodeUser: User = User(user.username, encodePassword, user.nickName, user.gender, user.birthday, user.authority)
+        return userRepository.save(encodeUser)
     }
 }
