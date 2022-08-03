@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService(
-    @Autowired private val userRepository: UserRepository,
-    @Autowired private val bCryptPasswordEncoder: BCryptPasswordEncoder): UserDetailsService {
+    private val userRepository: UserRepository,
+    private val bCryptPasswordEncoder: BCryptPasswordEncoder): UserDetailsService {
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
         val user: User = userRepository.findByUsername(username)?: throw UsernameNotFoundException("아이디나 비밀번호가 일치하지 않습니다.")
@@ -21,8 +21,12 @@ class UserService(
     }
 
     fun saveUser(user: User): User {
-        val encodePassword: String = bCryptPasswordEncoder.encode(user.password)
-        val encodeUser: User = User(user.username, encodePassword, user.nickName, user.gender, user.birthday, user.authority)
-        return userRepository.save(encodeUser)
+        val userWithEncodedPassword: User = createUserWithEncodedPassword(user)
+        return userRepository.save(userWithEncodedPassword)
+    }
+
+    fun createUserWithEncodedPassword(user: User): User {
+        val encodedPassword: String = bCryptPasswordEncoder.encode(user.password)
+        return User(user.username, encodedPassword, user.nickName, user.gender, user.birthday, user.authority)
     }
 }
