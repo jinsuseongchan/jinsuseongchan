@@ -1,4 +1,4 @@
-package io.github.jinsuseongchan.global.domain
+package io.github.jinsuseongchan.global.config
 
 import lombok.Getter
 

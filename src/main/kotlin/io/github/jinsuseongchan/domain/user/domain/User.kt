@@ -1,6 +1,6 @@
 package io.github.jinsuseongchan.domain.user.domain
 
-import io.github.jinsuseongchan.global.domain.Authority
+import io.github.jinsuseongchan.global.config.Authority
 import io.github.jinsuseongchan.global.util.AuthorityConverter
 import lombok.Getter
 import org.hibernate.annotations.DynamicInsert
