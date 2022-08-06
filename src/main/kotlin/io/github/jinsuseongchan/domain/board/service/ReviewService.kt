@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class ReviewService(val reviewRepository: ReviewRepository) {
+class ReviewService(
+    val reviewRepository: ReviewRepository,
+    val restaurantRepository: RestaurantRepository) {
 
     fun createReview(review: Review): Review {
         return reviewRepository.save(review)
     }
-
-    @Autowired
-    lateinit var restaurantRepository: RestaurantRepository
 
     fun getReviewsByRestaurant(restaurantId: Long): List<Review> {
         val restaurant: Restaurant = restaurantRepository.findById(restaurantId).get()
