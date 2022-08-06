@@ -16,6 +16,14 @@ class ReviewService(
         return reviewRepository.save(review)
     }
 
+    fun deleteReview(reviewId: Long): Review {
+        val review = reviewRepository.findById(reviewId).get()
+        review.isDeleted = true
+        return reviewRepository.save(review)
+    }
+
+
+
     fun getReviewsByRestaurant(restaurantId: Long): List<Review> {
         val restaurant: Restaurant = restaurantRepository.findById(restaurantId).get()
         return reviewRepository.findByRestaurantId(restaurant)
