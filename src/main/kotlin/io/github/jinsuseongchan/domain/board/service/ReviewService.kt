@@ -22,7 +22,9 @@ class ReviewService(
         return reviewRepository.save(review)
     }
 
-
+    fun updateReview(review: Review): Review {
+        return reviewRepository.save(review)
+    }
 
     fun getReviewsByRestaurant(restaurantId: Long): List<Review> {
         val restaurant: Restaurant = restaurantRepository.findById(restaurantId).get()
