@@ -3,6 +3,7 @@ package io.github.jinsuseongchan.domain.board.domain
 import io.github.jinsuseongchan.domain.restaurant.domain.Restaurant
 import io.github.jinsuseongchan.domain.user.domain.User
 import lombok.Getter
+import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
 import javax.persistence.Column
@@ -29,7 +30,11 @@ class Review (
     var restaurantId: Restaurant,
 
     @Column(name = "post_script", nullable = false)
-    var postScript: String
+    var postScript: String,
+
+    @Column(name = "is_deleted", nullable = false)
+    @ColumnDefault("TRUE")
+    var isDeleted: Boolean
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
