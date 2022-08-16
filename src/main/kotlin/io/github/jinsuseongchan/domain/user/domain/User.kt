@@ -3,8 +3,10 @@ package io.github.jinsuseongchan.domain.user.domain
 import io.github.jinsuseongchan.global.config.Authority
 import io.github.jinsuseongchan.global.util.AuthorityConverter
 import lombok.Getter
+import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
+import java.sql.Timestamp
 import java.time.LocalDate
 import javax.persistence.Column
 import javax.persistence.Convert
@@ -43,4 +45,7 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
+
+    @CreationTimestamp
+    var createdAt: Timestamp? = null
 }
