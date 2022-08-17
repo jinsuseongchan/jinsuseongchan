@@ -28,4 +28,8 @@ class UserService(
         val encodedPassword: String = bCryptPasswordEncoder.encode(user.password)
         return User(user.username, encodedPassword, user.nickName, user.gender, user.birthday, user.authority)
     }
+
+    fun updateUser(user: User): User {
+        return userRepository.save(user)
+    }
 }
