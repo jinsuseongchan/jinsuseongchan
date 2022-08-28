@@ -4,8 +4,11 @@ import io.github.jinsuseongchan.domain.restaurant.domain.Restaurant
 import io.github.jinsuseongchan.domain.user.domain.User
 import lombok.Getter
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
+import org.hibernate.annotations.UpdateTimestamp
+import java.sql.Timestamp
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -43,4 +46,10 @@ class Review (
 
     @Column(name = "picture_path")
     var picturePath: String? = null
+
+    @CreationTimestamp
+    var createdAt: Timestamp? = null
+
+    @UpdateTimestamp
+    var updatedAt: Timestamp? = null
 }
