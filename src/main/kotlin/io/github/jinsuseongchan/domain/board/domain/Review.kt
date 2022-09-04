@@ -1,7 +1,6 @@
 package io.github.jinsuseongchan.domain.board.domain
 
 import io.github.jinsuseongchan.domain.restaurant.domain.Restaurant
-import io.github.jinsuseongchan.domain.user.domain.User
 import lombok.Getter
 import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.CreationTimestamp
@@ -24,10 +23,6 @@ import javax.persistence.Table
 @DynamicUpdate
 @Table(name = "review")
 class Review (
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    var userId: User,
-
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     var restaurantId: Restaurant,
