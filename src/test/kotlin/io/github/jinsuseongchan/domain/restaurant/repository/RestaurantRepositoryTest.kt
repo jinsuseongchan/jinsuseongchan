@@ -3,15 +3,12 @@ package io.github.jinsuseongchan.domain.restaurant.repository
 import io.github.jinsuseongchan.domain.restaurant.domain.Category
 import io.github.jinsuseongchan.domain.restaurant.domain.Restaurant
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
-import org.hibernate.TransientPropertyValueException
 import org.junit.BeforeClass
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.dao.DataIntegrityViolationException
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 class RestaurantRepositoryTest {
