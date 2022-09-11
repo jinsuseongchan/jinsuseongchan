@@ -5,6 +5,7 @@ import io.github.jinsuseongchan.domain.restaurant.domain.Restaurant
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -12,14 +13,15 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.dao.InvalidDataAccessApiUsageException
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
-class RestaurantRepositoryTest {
+@DataJpaTest(showSql = true)
+class RestaurantRepositoryTest @Autowired constructor(
+    val restaurantRepository: RestaurantRepository,
+    val categoryRepository: CategoryRepository
+) {
 
-    @DataJpaTest(showSql = true)
+    @Nested
     @DisplayName("식당 정보 저장 테스트")
-    class RestaurantSaveTest @Autowired constructor(
-        val restaurantRepository: RestaurantRepository,
-        val categoryRepository: CategoryRepository
-    ) {
+    inner class RestaurantSaveTest {
         val category = Category(name = "테스트 카테고리")
 
         @Test
