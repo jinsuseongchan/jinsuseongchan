@@ -27,7 +27,6 @@ class RestaurantRepositoryTest {
         fun succeedSavingRestaurantInfo() {
             // given
             val testCategory = categoryRepository.save(category)
-
             val restaurant = Restaurant(
                 name = "식당 테스트",
                 address = "주소 테스트",
@@ -46,12 +45,11 @@ class RestaurantRepositoryTest {
         @DisplayName("잘못된 카테고리로는 식당 정보를 저장할 수 없다")
         fun failSavingCauseByNotExistCategory() {
             // given
-            val notExistCategory = Category(name = "존재하지 않는 카테고리")
             val restaurant = Restaurant(
                 name = "식당 테스트",
                 address = "주소 테스트",
                 telephoneNumber = "021111323",
-                categoryId = notExistCategory
+                categoryId = category
             )
 
             // when
