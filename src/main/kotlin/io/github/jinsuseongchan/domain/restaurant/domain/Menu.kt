@@ -27,7 +27,7 @@ class Menu (
     var price: Money,
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id", nullable = false)
     var restaurantId: Restaurant
 ) {
     @Id
