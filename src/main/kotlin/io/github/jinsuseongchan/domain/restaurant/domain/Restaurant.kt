@@ -28,7 +28,7 @@ class Restaurant (
     var telephoneNumber: String,
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     var categoryId: Category,
 ) {
     @Id
