@@ -5,12 +5,12 @@ import javax.persistence.Embeddable
 
 @Getter
 @Embeddable
-class Money (var value: Int) {
+class Money (var money: Int) {
     fun add(money: Money): Money {
-        return Money(this.value + money.value)
+        return Money(this.money + money.money)
     }
 
-    fun multiply(multipler: Int): Money {
-        return Money(this.value * multipler)
+    fun multiply(multiplier: Int): Money {
+        return Money(this.money * multiplier)
     }
 }
