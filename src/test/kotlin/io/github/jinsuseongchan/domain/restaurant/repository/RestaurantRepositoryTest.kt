@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.dao.InvalidDataAccessApiUsageException
 import org.springframework.data.repository.findByIdOrNull
 
@@ -68,8 +69,8 @@ class RestaurantRepositoryTest @Autowired constructor(
     inner class RestaurantLookUpTest {
 
         @Test
-        @DisplayName("식당 아이디로 식당 정보를 조회할 수 있다")
-        fun succeedLookingUpRestaurantInfo() {
+        @DisplayName("식당 아이디로 식당을 조회할 수 있다")
+        fun succeedLookingUpRestaurant() {
             //given
             val testCategory = categoryRepository.save(category)
             val savedRestaurant = restaurantRepository.save(
@@ -124,6 +125,19 @@ class RestaurantRepositoryTest @Autowired constructor(
 
             // then
             assertThat(findRestaurantListByCategory).containsExactlyInAnyOrder(savedRestaurant1, savedRestaurant2, savedRestaurant3)
+        }
+
+        @Test
+        @DisplayName("없는 식당 아이디로 조회하면 null을 얻는다")
+        fun failLookingUpRestaurantCauseNotExistId() {
+            // given
+            val id = 10L
+
+            // when
+            val findRestaurant = restaurantRepository.findByIdOrNull(id)
+
+            // then
+            assertThat(findRestaurant).isNull()
         }
     }
 }
