@@ -20,6 +20,25 @@ class RestaurantServiceTest @Autowired constructor(
 ) {
 
     @Test
+    @DisplayName("식당 정보를 저장할 수 있다")
+    fun saveRestaurantTest() {
+        // given
+        val category = categoryRepository.save(Category(name = "테스트 카테고리"))
+        val restaurant = Restaurant(
+            name = "테스트 식당",
+            address = "테스트 주소",
+            telephoneNumber = "021112222",
+            categoryId = category
+        )
+
+        // when
+        val savedRestaurant = restaurantService.saveRestaurant(restaurant)
+
+        // then
+        assertThat(savedRestaurant).isSameAs(restaurant)
+    }
+
+    @Test
     @DisplayName("식당 id를 통해서 식당 정보를 얻어올 수 있다")
     fun getRestaurantByRestaurantIdTest() {
         // given
