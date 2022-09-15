@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.dao.InvalidDataAccessApiUsageException
 import org.springframework.data.repository.findByIdOrNull
 
@@ -21,8 +20,6 @@ class RestaurantRepositoryTest @Autowired constructor(
     val categoryRepository: CategoryRepository
 ) {
 
-    val category = Category(name = "테스트 카테고리")
-
     @Nested
     @DisplayName("식당 정보 저장 테스트")
     inner class RestaurantSaveTest {
@@ -31,12 +28,12 @@ class RestaurantRepositoryTest @Autowired constructor(
         @DisplayName("식당 정보를 저장할 수 있다")
         fun succeedSavingRestaurantInfo() {
             // given
-            val testCategory = categoryRepository.save(category)
+            val category = categoryRepository.save(Category(name = "테스트 카테고리"))
             val restaurant = Restaurant(
                 name = "식당 테스트",
                 address = "주소 테스트",
                 telephoneNumber = "021234567",
-                categoryId = testCategory
+                categoryId = category
             )
 
             // when
@@ -54,7 +51,7 @@ class RestaurantRepositoryTest @Autowired constructor(
                 name = "식당 테스트",
                 address = "주소 테스트",
                 telephoneNumber = "021111323",
-                categoryId = category
+                categoryId = Category("저장되지 않은 카테고리")
             )
 
             // when
@@ -72,13 +69,13 @@ class RestaurantRepositoryTest @Autowired constructor(
         @DisplayName("식당 아이디로 식당을 조회할 수 있다")
         fun succeedLookingUpRestaurant() {
             //given
-            val testCategory = categoryRepository.save(category)
+            val category = categoryRepository.save(Category(name = "테스트 카테고리"))
             val savedRestaurant = restaurantRepository.save(
                 Restaurant(
                     name = "식당 테스트",
                     address = "테스트 주소",
                     telephoneNumber = "0213234345",
-                    categoryId = testCategory
+                    categoryId = category
                 )
             )
             val savedRestaurantId = savedRestaurant.id?:1L
@@ -94,13 +91,13 @@ class RestaurantRepositoryTest @Autowired constructor(
         @DisplayName("카테고리에 해당하는 식당 리스트를 얻을 수 있다")
         fun succeedGetRestaurantListByCategory() {
             // given
-            val testCategory = categoryRepository.save(category)
+            val category = categoryRepository.save(Category(name = "테스트 카테고리"))
             val savedRestaurant1 = restaurantRepository.save(
                 Restaurant(
                     name = "식당 테스트1",
                     address = "테스트 주소1",
                     telephoneNumber = "021111111",
-                    categoryId = testCategory
+                    categoryId = category
                 )
             )
             val savedRestaurant2 = restaurantRepository.save(
@@ -108,7 +105,7 @@ class RestaurantRepositoryTest @Autowired constructor(
                     name = "식당 테스트2",
                     address = "테스트 주소2",
                     telephoneNumber = "022222222",
-                    categoryId = testCategory
+                    categoryId = category
                 )
             )
             val savedRestaurant3 = restaurantRepository.save(
@@ -116,12 +113,12 @@ class RestaurantRepositoryTest @Autowired constructor(
                     name = "식당 테스트3",
                     address = "테스트 주소3",
                     telephoneNumber = "023333333",
-                    categoryId = testCategory
+                    categoryId = category
                 )
             )
 
             // when
-            val findRestaurantListByCategory = restaurantRepository.findByCategoryId(testCategory)
+            val findRestaurantListByCategory = restaurantRepository.findByCategoryId(category)
 
             // then
             assertThat(findRestaurantListByCategory).containsExactlyInAnyOrder(savedRestaurant1, savedRestaurant2, savedRestaurant3)
