@@ -24,4 +24,23 @@ class CategoryServiceTest @Autowired constructor(val categoryService: CategorySe
         // then
         assertThat(savedCategory).isSameAs(category)
     }
+
+    @Test
+    @DisplayName("모든 카테고리를 리스트로 얻을 수 있다")
+    fun getAllCategoryTest() {
+        // given
+        val categoryList = listOf(
+            Category(name = "테스트 카테고리1"),
+            Category(name = "테스트 카테고리2"),
+            Category(name = "테스트 카테고리3"),
+            Category(name = "테스트 카테고리4")
+        )
+        categoryList.map { categoryService.saveCategory(it) }
+
+        // when
+        val allCategory = categoryService.getAllCategory()
+
+        // then
+        assertThat(allCategory).isEqualTo(categoryList)
+    }
 }
