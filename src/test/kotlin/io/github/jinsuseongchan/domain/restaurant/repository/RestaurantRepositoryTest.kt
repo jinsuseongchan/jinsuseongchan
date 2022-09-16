@@ -92,23 +92,19 @@ class RestaurantRepositoryTest @Autowired constructor(
         fun succeedGetRestaurantListByCategory() {
             // given
             val category = categoryRepository.save(Category(name = "테스트 카테고리"))
-            val savedRestaurant1 = restaurantRepository.save(
+            val restaurantList = listOf(
                 Restaurant(
                     name = "식당 테스트1",
                     address = "테스트 주소1",
                     telephoneNumber = "021111111",
                     categoryId = category
-                )
-            )
-            val savedRestaurant2 = restaurantRepository.save(
+                ),
                 Restaurant(
                     name = "식당 테스트2",
                     address = "테스트 주소2",
                     telephoneNumber = "022222222",
                     categoryId = category
-                )
-            )
-            val savedRestaurant3 = restaurantRepository.save(
+                ),
                 Restaurant(
                     name = "식당 테스트3",
                     address = "테스트 주소3",
@@ -116,12 +112,13 @@ class RestaurantRepositoryTest @Autowired constructor(
                     categoryId = category
                 )
             )
+            restaurantList.map { restaurantRepository.save(it) }
 
             // when
             val findRestaurantListByCategory = restaurantRepository.findByCategoryId(category)
 
             // then
-            assertThat(findRestaurantListByCategory).containsExactlyInAnyOrder(savedRestaurant1, savedRestaurant2, savedRestaurant3)
+            assertThat(findRestaurantListByCategory).isEqualTo(restaurantList)
         }
 
         @Test
