@@ -7,11 +7,13 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.context.SpringBootTest
+import javax.transaction.Transactional
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 class CategoryServiceTest @Autowired constructor(val categoryService: CategoryService) {
 
+    @Transactional
     @Test
     @DisplayName("카테고리 정보를 저장할 수 있다")
     fun saveCategoryTest() {
@@ -25,6 +27,7 @@ class CategoryServiceTest @Autowired constructor(val categoryService: CategorySe
         assertThat(savedCategory).isSameAs(category)
     }
 
+    @Transactional
     @Test
     @DisplayName("모든 카테고리를 리스트로 얻을 수 있다")
     fun getAllCategoryTest() {
