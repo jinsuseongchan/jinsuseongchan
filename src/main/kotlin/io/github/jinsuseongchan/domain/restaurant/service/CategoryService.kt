@@ -10,4 +10,8 @@ class CategoryService(val categoryRepository: CategoryRepository) {
     fun saveCategory(category: Category): Category {
         return categoryRepository.save(category)
     }
+
+    fun getAllCategory(): List<Category> {
+        return categoryRepository.findAll()
+    }
 }
