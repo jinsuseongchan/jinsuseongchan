@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.data.repository.findByIdOrNull
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DataJpaTest(showSql = true)
@@ -28,6 +29,25 @@ class CategoryRepositoryTest @Autowired constructor(val categoryRepository: Cate
 
             // then
             assertThat(savedCategory).isSameAs(category)
+        }
+    }
+
+    @Nested
+    @DisplayName("카테고리 정보 조회 테스트")
+    inner class CategoryLookUpTest {
+
+        @Test
+        @DisplayName("카테고리 아이디로 카테고리를 조회할 수 있다")
+        fun succeedLookingUpCategory() {
+            // given
+            val savedCategory = categoryRepository.save(Category(name = "테스트 카테고리"))
+            val savedCategoryId = savedCategory.id?:1L
+
+            // when
+            val findCategory = categoryRepository.findByIdOrNull(savedCategoryId)
+
+            // then
+            assertThat(findCategory).isSameAs(savedCategory)
         }
     }
 }
