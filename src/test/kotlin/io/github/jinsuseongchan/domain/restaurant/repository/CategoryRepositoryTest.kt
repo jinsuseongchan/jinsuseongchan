@@ -49,5 +49,17 @@ class CategoryRepositoryTest @Autowired constructor(val categoryRepository: Cate
             // then
             assertThat(findCategory).isSameAs(savedCategory)
         }
+
+        @Test
+        @DisplayName("없는 카테고리 아이디로 조회하면 null을 얻는다")
+        fun failLookingUpCategoryCauseNotExistId() {
+            // given
+            val id = 10L
+
+            // when
+            val findCategory = categoryRepository.findByIdOrNull(id)
+
+            assertThat(findCategory).isNull()
+        }
     }
 }
