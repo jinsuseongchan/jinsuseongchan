@@ -51,6 +51,23 @@ class CategoryRepositoryTest @Autowired constructor(val categoryRepository: Cate
         }
 
         @Test
+        @DisplayName("카테고리 리스트를 얻을 수 있다")
+        fun succeedGetCategoryList() {
+            // given
+            val categoryList = listOf(
+                Category(name = "테스트 카테고리1"),
+                Category(name = "테스트 카테고리2"),
+                Category(name = "테스트 카테고리3")
+            )
+            categoryList.map { categoryRepository.save(it) }
+
+            // when
+            val savedCategoryList = categoryRepository.findAll()
+
+            assertThat(savedCategoryList).isEqualTo(categoryList)
+        }
+
+        @Test
         @DisplayName("없는 카테고리 아이디로 조회하면 null을 얻는다")
         fun failLookingUpCategoryCauseNotExistId() {
             // given
