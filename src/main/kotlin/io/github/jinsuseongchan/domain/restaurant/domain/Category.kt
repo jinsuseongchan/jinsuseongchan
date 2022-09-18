@@ -23,4 +23,10 @@ class Category (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is Category) {
+            this.id == other.id
+        } else false
+    }
 }

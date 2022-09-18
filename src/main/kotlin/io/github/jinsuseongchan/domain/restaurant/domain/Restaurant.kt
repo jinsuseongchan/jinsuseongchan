@@ -28,11 +28,17 @@ class Restaurant (
     var telephoneNumber: String,
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     var categoryId: Category,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is Restaurant) {
+            this.id == other.id
+        } else false
+    }
 }
