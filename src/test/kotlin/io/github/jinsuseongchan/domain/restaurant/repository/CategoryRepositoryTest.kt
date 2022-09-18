@@ -44,10 +44,10 @@ class CategoryRepositoryTest @Autowired constructor(val categoryRepository: Cate
             val savedCategoryId = savedCategory.id?:1L
 
             // when
-            val findCategory = categoryRepository.findByIdOrNull(savedCategoryId)
+            val foundCategory = categoryRepository.findByIdOrNull(savedCategoryId)
 
             // then
-            assertThat(findCategory).isSameAs(savedCategory)
+            assertThat(foundCategory).isSameAs(savedCategory)
         }
 
         @Test
@@ -74,9 +74,9 @@ class CategoryRepositoryTest @Autowired constructor(val categoryRepository: Cate
             val id = 10L
 
             // when
-            val findCategory = categoryRepository.findByIdOrNull(id)
+            val foundCategory = categoryRepository.findByIdOrNull(id)
 
-            assertThat(findCategory).isNull()
+            assertThat(foundCategory).isNull()
         }
     }
 }

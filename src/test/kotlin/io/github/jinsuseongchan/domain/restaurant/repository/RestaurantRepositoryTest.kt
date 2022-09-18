@@ -70,7 +70,7 @@ class RestaurantRepositoryTest @Autowired constructor(
         fun succeedLookingUpRestaurant() {
             //given
             val category = categoryRepository.save(Category(name = "테스트 카테고리"))
-            val savedRestaurant = restaurantRepository.save(
+            val restaurant = restaurantRepository.save(
                 Restaurant(
                     name = "식당 테스트",
                     address = "테스트 주소",
@@ -78,13 +78,13 @@ class RestaurantRepositoryTest @Autowired constructor(
                     categoryId = category
                 )
             )
-            val savedRestaurantId = savedRestaurant.id?:1L
+            val restaurantId = restaurant.id?:1L
 
             // when
-            val findRestaurant = restaurantRepository.findByIdOrNull(savedRestaurantId)
+            val foundRestaurant = restaurantRepository.findByIdOrNull(restaurantId)
 
             // then
-            assertThat(findRestaurant).isSameAs(savedRestaurant)
+            assertThat(foundRestaurant).isSameAs(restaurant)
         }
 
         @Test
@@ -115,10 +115,10 @@ class RestaurantRepositoryTest @Autowired constructor(
             restaurantList.map { restaurantRepository.save(it) }
 
             // when
-            val findRestaurantListByCategory = restaurantRepository.findByCategoryId(category)
+            val foundRestaurantListByCategory = restaurantRepository.findByCategoryId(category)
 
             // then
-            assertThat(findRestaurantListByCategory).isEqualTo(restaurantList)
+            assertThat(foundRestaurantListByCategory).isEqualTo(restaurantList)
         }
 
         @Test
@@ -128,10 +128,10 @@ class RestaurantRepositoryTest @Autowired constructor(
             val id = 10L
 
             // when
-            val findRestaurant = restaurantRepository.findByIdOrNull(id)
+            val foundRestaurant = restaurantRepository.findByIdOrNull(id)
 
             // then
-            assertThat(findRestaurant).isNull()
+            assertThat(foundRestaurant).isNull()
         }
     }
 }
