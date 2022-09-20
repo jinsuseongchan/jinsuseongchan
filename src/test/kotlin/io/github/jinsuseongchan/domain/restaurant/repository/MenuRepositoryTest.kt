@@ -107,5 +107,44 @@ class MenuRepositoryTest @Autowired constructor(
             // then
             assertThat(foundMenu).isSameAs(menu)
         }
+
+        @Test
+        @DisplayName("식당에서 파는 메뉴 리스트를 얻을 수 있다")
+        fun succeedGetMenuListByRestaurant() {
+            // given
+            val category = categoryRepository.save(Category(name = "테스트 카테고리"))
+            val restaurant = restaurantRepository.save(
+                Restaurant(
+                    name = "테스트 식당",
+                    address = "테그스 주소",
+                    telephoneNumber = "021113333",
+                    categoryId = category
+                )
+            )
+            val menuList = listOf(
+                Menu(
+                    name = "테스트 메뉴1",
+                    price = Money(money = 10000),
+                    restaurantId = restaurant
+                ),
+                Menu(
+                    name = "테스트 메뉴2",
+                    price = Money(money = 20000),
+                    restaurantId = restaurant
+                ),
+                Menu(
+                    name = "테스트 메뉴3",
+                    price = Money(money = 30000),
+                    restaurantId = restaurant
+                )
+            )
+            menuList.map { menuRepository.save(it) }
+
+            // when
+            val foundMenuListByRestaurant = menuRepository.findByRestaurantId(restaurant)
+
+            // then
+            assertThat(foundMenuListByRestaurant).isEqualTo(menuList)
+        }
     }
 }
