@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.dao.InvalidDataAccessApiUsageException
+import org.springframework.data.repository.findByIdOrNull
 
 @DataJpaTest(showSql = true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
@@ -71,6 +72,40 @@ class MenuRepositoryTest @Autowired constructor(
             // then
             assertThatExceptionOfType(InvalidDataAccessApiUsageException::class.java)
                 .isThrownBy { menuRepository.save(menu) }
+        }
+    }
+
+    @Nested
+    @DisplayName("메뉴 정보 조회 테스트")
+    inner class MenuLookUpTest() {
+
+        @Test
+        @DisplayName("메뉴 아이디로 메뉴를 조회할 수 있다")
+        fun succeedLookingUpMenu() {
+            // given
+            val category = categoryRepository.save(Category(name = "테스트 카테고리"))
+            val restaurant = restaurantRepository.save(
+                Restaurant(
+                    name = "식당 테스트",
+                    address = "테스트 주소",
+                    telephoneNumber = "0213234345",
+                    categoryId = category
+                )
+            )
+            val menu = menuRepository.save(
+                Menu(
+                    name = "테스트 메뉴",
+                    price = Money(money = 10000),
+                    restaurantId = restaurant
+                )
+            )
+            val menuId = menu.id?:1L
+
+            // when
+            val foundMenu = menuRepository.findByIdOrNull(menuId)
+
+            // then
+            assertThat(foundMenu).isSameAs(menu)
         }
     }
 }
