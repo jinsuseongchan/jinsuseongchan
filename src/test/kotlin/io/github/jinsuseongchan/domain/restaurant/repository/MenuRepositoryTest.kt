@@ -146,5 +146,18 @@ class MenuRepositoryTest @Autowired constructor(
             // then
             assertThat(foundMenuListByRestaurant).isEqualTo(menuList)
         }
+
+        @Test
+        @DisplayName("없는 메뉴 아이디로 조회하면 null을 얻는다")
+        fun failLookingUpMenuCauseByNotExistId() {
+            // given
+            val menuId = 10L
+
+            // when
+            val foundMenu = menuRepository.findByIdOrNull(menuId)
+
+            // then
+            assertThat(foundMenu).isNull()
+        }
     }
 }
