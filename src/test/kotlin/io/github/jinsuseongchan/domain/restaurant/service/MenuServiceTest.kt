@@ -46,4 +46,30 @@ class MenuServiceTest @Autowired constructor(
         // then
         assertThat(savedMenu).isSameAs(menu)
     }
+
+    @Test
+    @DisplayName("메뉴 정보를 조회할 수 있다")
+    fun getMenuTest() {
+        // given
+        val category = categoryRepository.save(Category(name = "테스트 카테고리"))
+        val restaurant = restaurantRepository.save(
+            Restaurant(
+                name = "테스트 식당",
+                address = "테스트 주소",
+                telephoneNumber = "021113333",
+                categoryId = category
+            )
+        )
+        val menu = menuService.saveMenu(Menu(
+            name = "테스트 메뉴",
+            price = Money(money = 10000),
+            restaurantId = restaurant)
+        )
+
+        // when
+        val foundMenu = menuService.getMenuByMenuId(menu.id ?: 0)
+
+        // then
+        assertThat(foundMenu).isEqualTo(menu)
+    }
 }
