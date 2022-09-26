@@ -21,4 +21,9 @@ class CategoryController {
     fun createCategory(@RequestBody category: Category): Category {
         return categoryService.saveCategory(category)
     }
+
+    @GetMapping("/list")
+    fun getCategoryList(): List<Category> {
+        return categoryService.getAllCategory()
+    }
 }
