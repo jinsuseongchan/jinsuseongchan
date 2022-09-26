@@ -37,4 +37,10 @@ class Menu (
 
     @Column(name = "picture_path")
     var picturePath: String? = null
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is Menu) {
+            this.id == other.id
+        } else false
+    }
 }
