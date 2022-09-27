@@ -29,6 +29,20 @@ class CategoryServiceTest @Autowired constructor(val categoryService: CategorySe
 
     @Transactional
     @Test
+    @DisplayName("id로 카테고리를 조회할 수 있다")
+    fun getCategoryByCategoryIdTest() {
+        // given
+        val category = categoryService.saveCategory(Category(name = "테스트 카테고리"))
+
+        // when
+        val foundCategory = categoryService.getCategoryByCategoryId(category.id!!)
+
+        // then
+        assertThat(foundCategory).isSameAs(category)
+    }
+
+    @Transactional
+    @Test
     @DisplayName("모든 카테고리를 리스트로 얻을 수 있다")
     fun getAllCategoryTest() {
         // given
