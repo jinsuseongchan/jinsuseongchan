@@ -5,6 +5,7 @@ import io.github.jinsuseongchan.domain.restaurant.service.CategoryService
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,6 +21,11 @@ class CategoryController {
     @PostMapping("/create")
     fun createCategory(@RequestBody category: Category): Category {
         return categoryService.saveCategory(category)
+    }
+
+    @GetMapping("/{id}")
+    fun getCategoryById(@PathVariable id: Long): Category {
+        return categoryService.getCategoryByCategoryId(id)
     }
 
     @GetMapping("/list")
