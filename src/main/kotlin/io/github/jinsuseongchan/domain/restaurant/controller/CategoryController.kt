@@ -21,7 +21,7 @@ class CategoryController {
 
     @PostMapping("/create")
     fun createCategory(@RequestBody category: Category): Category {
-        return categoryService.saveCategory(category)
+        return categoryService.createCategory(category)
     }
 
     @GetMapping("/{id}")
@@ -36,6 +36,6 @@ class CategoryController {
 
     @PatchMapping("/update")
     fun updateCategory(@RequestBody category: Category): Category {
-        return categoryService.saveCategory(category)
+        return categoryService.updateCategory(category)
     }
 }
