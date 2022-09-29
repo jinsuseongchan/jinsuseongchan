@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service
 @Service
 class CategoryService(val categoryRepository: CategoryRepository) {
 
-    fun saveCategory(category: Category): Category {
+    fun createCategory(category: Category): Category {
+        return categoryRepository.save(category)
+    }
+
+    fun updateCategory(category: Category): Category {
         return categoryRepository.save(category)
     }
 
