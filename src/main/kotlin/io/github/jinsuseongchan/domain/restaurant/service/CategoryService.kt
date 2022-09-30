@@ -23,4 +23,8 @@ class CategoryService(val categoryRepository: CategoryRepository) {
     fun getAllCategory(): List<Category> {
         return categoryRepository.findAll()
     }
+
+    fun deleteCategory(categoryId: Long) {
+        categoryRepository.deleteById(categoryId)
+    }
 }
