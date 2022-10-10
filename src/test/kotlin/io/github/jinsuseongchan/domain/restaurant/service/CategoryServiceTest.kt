@@ -60,4 +60,19 @@ class CategoryServiceTest @Autowired constructor(val categoryService: CategorySe
         // then
         assertThat(allCategory).isEqualTo(categoryList)
     }
+
+    @Transactional
+    @Test
+    @DisplayName("카테고리 정보를 갱신할 수 있다")
+    fun updateCategoryTest() {
+        // given
+        val category = categoryService.createCategory(Category(name = "테스트 카테고리"))
+
+        // when
+        category.name = "업데이트 카테고리"
+        val updatedCategory = categoryService.updateCategory(category)
+
+        // then
+        assertThat(updatedCategory).isSameAs(category)
+    }
 }
