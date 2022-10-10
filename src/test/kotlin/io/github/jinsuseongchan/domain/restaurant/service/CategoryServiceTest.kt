@@ -15,13 +15,13 @@ class CategoryServiceTest @Autowired constructor(val categoryService: CategorySe
 
     @Transactional
     @Test
-    @DisplayName("카테고리 정보를 저장할 수 있다")
-    fun saveCategoryTest() {
+    @DisplayName("카테고리 정보를 생성할 수 있다")
+    fun createCategoryTest() {
         // given
         val category = Category(name = "테스트 카테고리")
 
         // when
-        val savedCategory = categoryService.saveCategory(category)
+        val savedCategory = categoryService.createCategory(category)
 
         // then
         assertThat(savedCategory).isSameAs(category)
@@ -32,7 +32,7 @@ class CategoryServiceTest @Autowired constructor(val categoryService: CategorySe
     @DisplayName("id로 카테고리를 조회할 수 있다")
     fun getCategoryByCategoryIdTest() {
         // given
-        val category = categoryService.saveCategory(Category(name = "테스트 카테고리"))
+        val category = categoryService.createCategory(Category(name = "테스트 카테고리"))
 
         // when
         val foundCategory = categoryService.getCategoryByCategoryId(category.id!!)
@@ -52,7 +52,7 @@ class CategoryServiceTest @Autowired constructor(val categoryService: CategorySe
             Category(name = "테스트 카테고리3"),
             Category(name = "테스트 카테고리4")
         )
-        categoryList.map { categoryService.saveCategory(it) }
+        categoryList.map { categoryService.createCategory(it) }
 
         // when
         val allCategory = categoryService.getAllCategory()
