@@ -4,7 +4,7 @@ on:
 
 jobs:
   job1:
-    uses: jinsuseongchan/.github/workflow-templates/octo-organization-ci.yaml
+    uses: jinsuseoungchan/.github/.github/workflow-templates/octo-organization-ci.yaml@main
 
   job2:
     runs-on: ubuntu-latest
